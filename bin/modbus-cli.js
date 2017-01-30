@@ -92,6 +92,44 @@ var argv = require('yargs')
             describe: 'Parse registers as'
         },
     })
+    .command('force', 'force single coil', {
+        url: {
+            alias: 'u',
+            demand: true,
+            nargs: 1,
+            describe: 'URL (e.g. "/dev/ttyUSB0", "192.168.1.11")'
+        },
+        addr: {
+            alias: 'a',
+            demand: true,
+            nargs: 1,
+            describe: 'Starting address'
+        },
+        value: {
+            alias: 'v',
+            demand: true,
+            choices: [0, 1],
+            describe: 'Value to send'
+        },
+        port: {
+            alias: 'p',
+            nargs: 1,
+            default: 502,
+            describe: 'TCP port'
+        },
+        baudrate: {
+            alias: 'b',
+            nargs: 1,
+            default: 9600,
+            describe: 'Serial port baudrate'
+        },
+        unitid: {
+            alias: 'i',
+            nargs: 1,
+            default: 1,
+            describe: 'Unit ID'
+        }
+    })
     .example('$0 read -u 192.168.1.11 -a 5', 'read one register at address 5')
 
     .demandCommand(1, 'Error: no a valid command')
@@ -132,6 +170,9 @@ function setClient() {
         break;
     case 'readi':
         readInput();
+        break;
+    case 'force':
+        forceCoil();
         break;
     default:
         console.log('Error: unsupported command');
@@ -178,6 +219,15 @@ function readInput() {
     client.readInputRegisters(argv.addr, argv.len)
       .then(function(d) {
           outputBuffer(d.buffer, argv.type) })
+      .catch(function(e) {
+          console.log(e.message); })
+      .then(close);
+}
+
+function forceCoil() {
+    client.writeCoil(argv.addr, argv.value)
+      .then(function(d) {
+          console.log('force single coil:', argv.addr, argv.value); })
       .catch(function(e) {
           console.log(e.message); })
       .then(close);
