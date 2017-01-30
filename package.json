@@ -1,0 +1,31 @@
+{
+  "name": "modbus-cli",
+  "version": "0.1.0",
+  "description": "NodeJS Modbus client",
+  "main": "./bin/modbus-cli.js",
+  "bin": {
+    "modbus-cli": "./bin/modbus-cli.js"
+  },
+  "scripts": {
+    "start": "node ./bin/modbus-cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yaacov/node-modbus-cli.git"
+  },
+  "keywords": [
+    "modbus",
+    "client"
+  ],
+  "author": "Yaacov Zamir <kobi.zamir@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yaacov/node-modbus-cli/issues"
+  },
+  "homepage": "https://github.com/yaacov/node-modbus-cli#readme",
+  "dependencies": {
+    "yargs": "^6.6.0",
+    "modbus-serial": "^5.1.1",
+    "serialport": "^4.0.7"
+  }
+}
