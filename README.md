@@ -7,7 +7,7 @@ Utility script for accessing Modbus devices. Many hobby devices and PLC controll
 
 ## Installation
 
-To install, run ``npm install`` if you install from source code, or ``pip install modbus-cli``.
+To install, run ``npm install`` if you install from source code, or ``npm install modbus-cli``.
 
 ## Usage
 
